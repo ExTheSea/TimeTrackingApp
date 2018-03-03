@@ -10,6 +10,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TimerStorageProvider } from '../providers/timer-storage/timer-storage';
+import { TrackingStorageProvider } from '../providers/tracking-storage/tracking-storage';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TimerStorageProvider } from '../providers/timer-storage/timer-storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TimerStorageProvider
+    TimerStorageProvider,
+    TrackingStorageProvider
   ],
   schemas: []
 })

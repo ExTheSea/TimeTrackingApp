@@ -5,5 +5,6 @@
     <time-display [time]="time" [showSeconds]="false"></time-display>
     <time-display [time]="time"></time-display>
     <div class="timer-button"><ion-icon [@iconSwitch]="runningIcon()" [name]="runningIcon()" (click)="testClick()"></ion-icon></div>
+    <button ion-button (click)="testDelete()">Delete</button>
   </ion-card-content>
 </ion-card>

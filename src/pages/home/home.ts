@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { SingleTimer } from './../../classes/single-timer';
 import { Component, OnInit } from '@angular/core';
