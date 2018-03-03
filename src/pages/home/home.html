@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="mainBckgr">
+    <ion-title>
+      Time Tracking
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="homeBckgr">
+  <timer *ngFor="let aTimer of timers" [singleTimer]="aTimer" ></timer>
+  <button ion-button color="primary" outline>Test button</button>
+  <ion-fab right bottom>
+    <button ion-fab color="secondary" outline>
+        <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

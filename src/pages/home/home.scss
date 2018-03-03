@@ -1,0 +1,14 @@
+page-home {
+    .homeBckgr {
+        background-color: color($colors, mainBckgr);
+        overflow: auto;
+    }
+
+    .toolbar-title {
+        font-weight: 300
+    }
+
+    .header::after {
+        background: none;
+    }
+}
