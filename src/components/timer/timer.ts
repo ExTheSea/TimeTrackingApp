@@ -1,3 +1,4 @@
+import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { Time } from './../../classes/time';
 import { SingleTimer } from './../../classes/single-timer';
 import { Component, Input, OnInit, trigger, transition, animate, style, state } from '@angular/core';
@@ -28,7 +29,7 @@ export class TimerComponent implements OnInit {
   @Input() singleTimer: SingleTimer;
   time: Time;
 
-  constructor() {
+  constructor(private timerStorage: TimerStorageProvider) {
     this.time = new Time(1,20, null);
   }
 
@@ -42,6 +43,7 @@ export class TimerComponent implements OnInit {
 
   testClick(): void {
     this.singleTimer.isRunning = !this.singleTimer.isRunning;
+    this.timerStorage.removeTimer(this.singleTimer);
   }
 
   runningIcon() {

@@ -1,0 +1,50 @@
+import { SingleTimer } from './../../classes/single-timer';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { Subject } from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+
+/*
+  Generated class for the TimerStorageProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+@Injectable()
+export class TimerStorageProvider {
+
+  timersChangedSubject: Subject<SingleTimer[]> = new Subject();
+
+  public timersChanged: Observable<SingleTimer[]> = this.timersChangedSubject.asObservable();
+
+  private triggerTimersChanged() {
+    this.getAllTimers().then(timers => this.timersChangedSubject.next(timers));
+  }
+
+  constructor(private storage: Storage) {}
+
+  public getAllTimers(): Promise<SingleTimer[]> {
+    return this.storage.get('timers').then(timers => timers as SingleTimer[])
+  }
+
+  public addTimer(timer: SingleTimer): void {
+    this.getAllTimers().then(timers => {
+      if (!timers || !Array.isArray(timers)) timers = [];
+      timers.push(timer);
+      this.storage.set('timers', timers).then(_ => this.triggerTimersChanged());
+    });
+  }
+
+  public getTimerById(timerId: Number): Promise<SingleTimer> {
+    return this.getAllTimers().then(timers => timers.find(timer => timer.id === timerId));
+  }
+
+  public removeTimer(singleTimer: SingleTimer) {
+    this.storage.get('timers').then(timers => {
+      timers.splice(timers.indexOf(singleTimer), 1);
+      this.storage.set('timers', timers).then(_ => this.triggerTimersChanged());
+    });
+  }
+
+}
