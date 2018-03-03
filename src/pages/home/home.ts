@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { SingleTimer } from './../../classes/single-timer';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -10,18 +12,17 @@ export class HomePage implements OnInit {
 
   timers: SingleTimer[] = [];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private timerStorage: TimerStorageProvider) {
+    this.timerStorage.timersChanged.subscribe(timers => this.timers = timers);
+    this.timerStorage.getAllTimers().then(timers => this.timers = timers);
   }
 
   ngOnInit() {
-    const timer1 = new SingleTimer();
-    timer1.name = "Test Timer 1";
-    this.timers.push(timer1);
+  }
 
-
-    const timer2 = new SingleTimer()
-    timer2.name = "Test Timer 2"
-    this.timers.push(timer2)
-  
+  addExampleTimer(): void {
+    const timer = new SingleTimer();
+    timer.name = 'Test timer Example';
+    this.timerStorage.addTimer(timer);
   }
 }

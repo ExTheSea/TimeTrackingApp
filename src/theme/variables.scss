@@ -14,6 +14,8 @@ $app-direction: ltr;
 
 @import "ionic.globals";
 
+@import "palette.scss";
+
 
 // Shared Variables
 // --------------------------------------------------
@@ -23,6 +25,24 @@ $app-direction: ltr;
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
 
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
 
 
 // Named Color Variables
@@ -36,15 +56,19 @@ $app-direction: ltr;
 // https://coolors.co/323031-335c67-fff3b0-e09f3e-9e2a2b
 // https://coolors.co/323031-335c67-d1ccdc-f5edf0-886f68
 $colors: (
-  primary:    #8BBF9F,
-  secondary:  #D6BA73,
+  primary:    $color2,
+  secondary:  $color4,
   danger:     #f53d3d,
-  light:      #F5E0B7,
-  dark:       #222,
+  light:      $color4,
+  dark:       shade($color1, 80%),
   mainBckgr: (
-    base: #323031,
-    contrast: #F5E0B7
+    base: shade($color1, 50%),
+    contrast: tint($color1, 90%)
   ),
+  frontSecond: (
+    base: $color2,
+    contrast: tint($color2, 90%)
+  )
 );
 
 
@@ -92,3 +116,4 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
