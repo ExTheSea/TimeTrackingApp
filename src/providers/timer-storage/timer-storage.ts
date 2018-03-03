@@ -41,7 +41,7 @@ export class TimerStorageProvider {
   }
 
   public removeTimer(singleTimer: SingleTimer) {
-    this.storage.get('timers').then(timers => {
+    this.getAllTimers().then(timers => {
       timers.splice(timers.indexOf(singleTimer), 1);
       this.storage.set('timers', timers).then(_ => this.triggerTimersChanged());
     });
