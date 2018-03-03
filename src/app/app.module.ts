@@ -11,6 +11,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TimerStorageProvider } from '../providers/timer-storage/timer-storage';
 import { TrackingStorageProvider } from '../providers/tracking-storage/tracking-storage';
+import { TimerSettingStorageProvider } from '../providers/timer-setting-storage/timer-setting-storage';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TrackingStorageProvider } from '../providers/tracking-storage/tracking-
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TimerStorageProvider,
-    TrackingStorageProvider
+    TrackingStorageProvider,
+    TimerSettingStorageProvider
   ],
   schemas: []
 })

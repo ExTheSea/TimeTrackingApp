@@ -4,6 +4,8 @@ import { Time } from '../../classes/time';
 import { Storage } from '@ionic/storage';
 import { Subject } from 'rxjs/Subject';
 
+
+const TIMER_TRACKING_KEY = 'timerTracking';
 /*
   Generated class for the TrackingStorageProvider provider.
 
@@ -13,16 +15,17 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class TrackingStorageProvider {
 
+
   trackingChangedSubjects: Map<number, Subject<TimerTracking[]>> = new Map();
 
   constructor(private storage: Storage) {}
 
   public getAllTrackingsByTimerId(timerId: number): Promise<TimerTracking[]> {
-    return this.storage.get('timerTracking' + timerId).then(trackings => trackings as TimerTracking[])
+    return this.storage.get(TIMER_TRACKING_KEY + timerId).then(trackings => trackings as TimerTracking[])
   }
 
   public storeTrackingsByTimerId(timerId: number, trackings: TimerTracking[]): Promise<boolean> {
-    return this.storage.set('timerTracking' + timerId, trackings)
+    return this.storage.set(TIMER_TRACKING_KEY + timerId, trackings)
   }
 
   public startTrackingTimer(timerId: number) {
