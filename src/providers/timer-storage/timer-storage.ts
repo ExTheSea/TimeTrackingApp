@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
+const TIMERS_KEY = 'timers';
+
 /*
   Generated class for the TimerStorageProvider provider.
 
@@ -25,14 +27,14 @@ export class TimerStorageProvider {
   constructor(private storage: Storage) {}
 
   public getAllTimers(): Promise<SingleTimer[]> {
-    return this.storage.get('timers').then(timers => timers as SingleTimer[])
+    return this.storage.get(TIMERS_KEY).then(timers => timers as SingleTimer[])
   }
 
   public addTimer(timer: SingleTimer): void {
     this.getAllTimers().then(timers => {
       if (!timers || !Array.isArray(timers)) timers = [];
       timers.push(timer);
-      this.storage.set('timers', timers).then(_ => this.triggerTimersChanged());
+      this.storage.set(TIMERS_KEY, timers).then(_ => this.triggerTimersChanged());
     });
   }
 
@@ -43,14 +45,14 @@ export class TimerStorageProvider {
   public removeTimer(singleTimer: SingleTimer) {
     this.getAllTimers().then(timers => {
       timers.splice(timers.indexOf(singleTimer), 1);
-      this.storage.set('timers', timers).then(_ => this.triggerTimersChanged());
+      this.storage.set(TIMERS_KEY, timers).then(_ => this.triggerTimersChanged());
     });
   }
 
   public modifyTimer(singleTimer: SingleTimer) {
     return this.getAllTimers().then(timers => {
       timers[timers.findIndex(timer => timer.id === singleTimer.id)] = singleTimer;
-      return this.storage.set('timers', timers);
+      return this.storage.set(TIMERS_KEY, timers);
     });
   }
 
