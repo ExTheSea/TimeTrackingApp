@@ -47,4 +47,11 @@ export class TimerStorageProvider {
     });
   }
 
+  public modifyTimer(singleTimer: SingleTimer) {
+    return this.getAllTimers().then(timers => {
+      timers[timers.findIndex(timer => timer.id === singleTimer.id)] = singleTimer;
+      return this.storage.set('timers', timers);
+    });
+  }
+
 }

@@ -8,4 +8,8 @@ export class Time {
         this.minutes = minutes;
         this.seconds = seconds;
     }
+
+    static createByDate(date: Date): Time {
+        return new Time(date.getHours(), date.getMinutes(), date.getSeconds());
+    }
 }
