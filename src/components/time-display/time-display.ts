@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Time } from '../../classes/time';
+import { Duration } from 'moment';
 
 /**
  * Generated class for the TimeDisplayComponent component.
@@ -13,7 +13,7 @@ import { Time } from '../../classes/time';
 })
 export class TimeDisplayComponent {
 
-  @Input() time: Time;
+  @Input() duration: Duration;
   @Input() showSeconds: boolean = true;
 
   constructor() {
