@@ -1,10 +1,16 @@
 <ion-card>
   <ion-card-content>
-    <ion-card-title>{{ singleTimer.name }}</ion-card-title>
-
-    <time-display [time]="time" [showSeconds]="false"></time-display>
-    <time-display [time]="time"></time-display>
-    <div class="timer-button"><ion-icon [@iconSwitch]="runningIcon()" [name]="runningIcon()" (click)="testClick()"></ion-icon></div>
-    <button ion-button (click)="testDelete()">Delete</button>
+    <div class="timer-content">
+        <ion-card-title>{{ singleTimer.name }}</ion-card-title>
+    
+        <time-display [time]="time" [showSeconds]="false"></time-display>
+        <time-display [time]="time"></time-display>
+    </div>
+    <div class="timer-button">
+      <button ion-button icon-only color="primary" (click)="testClick()" clear color="secondary">
+          <ion-icon [@iconSwitch]="runningIcon()"  [name]="runningIcon()"></ion-icon>
+        </button>
+    </div>    
+    <button (click)="editTimer()">Edit</button>
   </ion-card-content>
 </ion-card>

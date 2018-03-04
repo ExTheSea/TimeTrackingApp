@@ -1,3 +1,4 @@
+import { TimerSettingsPage } from './../timer-settings/timer-settings';
 import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { SingleTimer } from './../../classes/single-timer';
 import { Component, OnInit } from '@angular/core';
@@ -23,5 +24,9 @@ export class HomePage implements OnInit {
     const timer = new SingleTimer();
     timer.name = 'Test timer Example';
     this.timerStorage.addTimer(timer);
+  }
+
+  addNewTimer(): void {
+    this.navCtrl.push(TimerSettingsPage);
   }
 }

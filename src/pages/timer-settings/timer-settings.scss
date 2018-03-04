@@ -1,0 +1,28 @@
+page-timer-settings {
+    $darkbckgr: shade(color($colors, lightSecondary), 70%);
+    $lightContrast: tint(color($colors, lightSecondary), 95%);
+    .content {
+        background-color: $darkbckgr;
+        color: $lightContrast;
+    }
+
+    .toolbar  .toolbar-background {
+        background-color: $darkbckgr;
+    }
+
+    .toolbar-content .toolbar-title, .toolbar .back-button {
+        color: $lightContrast;
+    }
+
+    .header::after {
+        background: none;
+    }
+
+    .item {
+        background: none;
+    }
+
+    .text-input {
+        color: $lightContrast;
+    }
+}

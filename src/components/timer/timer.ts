@@ -1,3 +1,5 @@
+import { TimerSettingsPage } from './../../pages/timer-settings/timer-settings';
+import { NavController } from 'ionic-angular';
 import { TrackingStorageProvider } from './../../providers/tracking-storage/tracking-storage';
 import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { Time } from './../../classes/time';
@@ -31,7 +33,11 @@ export class TimerComponent implements OnInit {
   @Input() singleTimer: SingleTimer;
   time: Time;
 
-  constructor(private timerStorage: TimerStorageProvider, private trackingStorage: TrackingStorageProvider) {
+  constructor(
+    private timerStorage: TimerStorageProvider,
+    private trackingStorage: TrackingStorageProvider,
+    private navCtrl: NavController
+  ) {
     this.time = new Time(1,20, null);
   }
 
@@ -56,5 +62,11 @@ export class TimerComponent implements OnInit {
 
   testDelete() {
     this.timerStorage.removeTimer(this.singleTimer);
+  }
+
+  editTimer() {
+    this.navCtrl.push(TimerSettingsPage, {
+      timer: this.singleTimer
+    })
   }
 }

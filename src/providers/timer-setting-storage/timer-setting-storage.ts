@@ -16,7 +16,10 @@ export class TimerSettingStorageProvider {
   constructor(public storage: Storage) {}
 
   public getTimerSettingByTimerId(timerId: number): Promise<TimerSetting> {
-    return this.storage.get(SETTING_STORAGE_KEY + timerId).then(setting => setting as TimerSetting);
+    return this.storage.get(SETTING_STORAGE_KEY + timerId).then(setting => {
+      if (!setting) throw Error('no Settings found')
+      return setting;
+    }).then(setting => setting as TimerSetting);
   }
 
   public setTimerSettingByTimerId(timerId: number, setting: TimerSetting): Promise<boolean> {

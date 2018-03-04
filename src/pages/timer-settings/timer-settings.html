@@ -1,0 +1,36 @@
+<!--
+  Generated template for the TimerSettingsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="lightSecondary">
+    <ion-title>{{ addNew ? 'Add a new Timer' : 'Edit timer ' + editTimer.name}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="primary" (click)="save()">
+        <ion-icon name="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+        <ion-label floating>Name</ion-label>
+        <ion-input [(ngModel)]="editTimer.name" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="timerSettings">
+        <ion-label floating>Target daily time</ion-label>
+        <ion-input [(ngModel)]="timerSettings.targetDayTime" type="number"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="timerSettings">
+        <ion-label floating>Target weekly time</ion-label>
+        <ion-input [(ngModel)]="timerSettings.targetWeekTime" type="number"></ion-input>
+    </ion-item>
+  </ion-list>
+</ion-content>
