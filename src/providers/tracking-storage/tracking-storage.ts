@@ -48,8 +48,17 @@ export class TrackingStorageProvider {
     })
   }
 
+  public removeAllByTimer(timerId: number): Promise<boolean> {
+    return this.storage.set(TIMER_TRACKING_KEY + timerId, [])
+      .then(success => {
+        this.trackingChangedSubjects.delete(timerId);
+        return success;
+      })
+  }
+
   private getTrackingChangedSubject(timerId: number) {
     if (!this.trackingChangedSubjects.has(timerId)) this.trackingChangedSubjects.set(timerId, new Subject<TimerTracking[]>())
     return this.trackingChangedSubjects.get(timerId)
   }
+  
 }

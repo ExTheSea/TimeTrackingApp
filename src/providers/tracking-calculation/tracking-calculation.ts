@@ -57,8 +57,8 @@ export class TrackingCalculationProvider {
   public getWeekDuration(timerId: number, calenderWeek: number) {
     return this.getRangeDuration(
       timerId,
-      this.getStartOfWeek(calenderWeek).hour(0),
-      this.getEndOfWeek(calenderWeek).hour(0).add(1, 'day')
+      this.getStartOfWeek(calenderWeek),
+      this.getEndOfWeek(calenderWeek)
     )
   }
 
