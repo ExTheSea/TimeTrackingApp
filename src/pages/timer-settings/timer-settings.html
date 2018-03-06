@@ -26,11 +26,14 @@
     </ion-item>
     <ion-item *ngIf="timerSettings">
         <ion-label floating>Target daily time</ion-label>
-        <ion-input [(ngModel)]="timerSettings.targetDayTime" type="number"></ion-input>
+        <!-- <ion-datetime displayFormat="HH:mm" pickerFormat="HH mm" [(ngModel)]="targetDayTimeInput"></ion-datetime> -->
+        <ion-input (input)="updateDayTimer($event.target.value)" type="number" [value]="avgDayTime"></ion-input>
+
     </ion-item>
     <ion-item *ngIf="timerSettings">
-        <ion-label floating>Target weekly time</ion-label>
-        <ion-input [(ngModel)]="timerSettings.targetWeekTime" type="number"></ion-input>
-    </ion-item>
+        <ion-label floating>Target weekly time (in hours)</ion-label>        
+        <ion-input (input)="updateWeekTimer($event.target.value)" type="number" [value]="avgWeekTime"></ion-input>
+
+    </ion-item>x 
   </ion-list>
 </ion-content>
