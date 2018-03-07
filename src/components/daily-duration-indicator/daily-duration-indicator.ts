@@ -1,3 +1,4 @@
+import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { transition } from '@angular/animations';
 import { TrackingCalculationProvider } from './../../providers/tracking-calculation/tracking-calculation';
 import { GeneralTimerTriggerProvider } from './../../providers/general-timer-trigger/general-timer-trigger';
@@ -27,10 +28,9 @@ export class DailyDurationIndicatorComponent implements OnDestroy, OnInit {
   constructor(
     private timerSettings: TimerSettingStorageProvider,
     private generalTrigger: GeneralTimerTriggerProvider,
-    private trackingCalc: TrackingCalculationProvider
+    private trackingCalc: TrackingCalculationProvider,
+    private timerStorage: TimerStorageProvider
   ) {
-    //this.timerSettings.getTimerSettingByTimerId(this.timerId)
-    //  .then(settings => this.avgDaily = settings.targetDayTime)
   }
 
   ngOnInit() {
@@ -38,6 +38,18 @@ export class DailyDurationIndicatorComponent implements OnDestroy, OnInit {
       this.trackingCalc.getDayDuration(this.timerId, moment())
         .then(duration => this.dailyDuration = duration);
     })
+    
+    this.updateSettings();
+
+     this.timerStorage.timersChanged.takeUntil(this.destroySubject).subscribe(_ => {
+        this.updateSettings();
+     })
+  }
+
+  private updateSettings(): void {
+    this.timerSettings.getTimerSettingByTimerId(this.timerId)
+    .then(settings => settings ? this.avgDaily = settings.targetDayTime : null)
+    .catch(err => console.error(err));
   }
 
   ngOnDestroy() {
