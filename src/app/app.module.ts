@@ -12,6 +12,7 @@ import { HomePage } from '../pages/home/home';
 import { TimerStorageProvider } from '../providers/timer-storage/timer-storage';
 import { TrackingStorageProvider } from '../providers/tracking-storage/tracking-storage';
 import { TimerSettingStorageProvider } from '../providers/timer-setting-storage/timer-setting-storage';
+import { TimerSettingsPageModule } from '../pages/timer-settings/timer-settings.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TimerSettingStorageProvider } from '../providers/timer-setting-storage/
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    ComponentsModule
+    ComponentsModule,
+    TimerSettingsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

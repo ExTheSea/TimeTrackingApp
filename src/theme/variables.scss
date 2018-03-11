@@ -58,9 +58,10 @@ $app-direction: ltr;
 $colors: (
   primary:    $color2,
   secondary:  $color4,
-  danger:     #f53d3d,
+  danger:     $color5,
   light:      $color4,
   dark:       shade($color1, 80%),
+  lightSecondary: $color3,
   mainBckgr: (
     base: shade($color1, 50%),
     contrast: tint($color1, 90%)

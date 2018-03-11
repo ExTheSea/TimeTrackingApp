@@ -52,7 +52,7 @@ export class TimerStorageProvider {
   public modifyTimer(singleTimer: SingleTimer) {
     return this.getAllTimers().then(timers => {
       timers[timers.findIndex(timer => timer.id === singleTimer.id)] = singleTimer;
-      return this.storage.set(TIMERS_KEY, timers);
+      return this.storage.set(TIMERS_KEY, timers).then(_ => this.triggerTimersChanged());
     });
   }
 
