@@ -1,3 +1,5 @@
+import { OverviewPageModule } from './../pages/overview/overview.module';
+import { OverviewPage } from './../pages/overview/overview';
 import { ComponentsModule } from './../components/components.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -27,7 +29,8 @@ import { TrackingCalculationProvider } from '../providers/tracking-calculation/t
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     ComponentsModule,
-    TimerSettingsPageModule
+    TimerSettingsPageModule,
+    OverviewPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

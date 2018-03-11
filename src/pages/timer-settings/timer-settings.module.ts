@@ -1,3 +1,5 @@
+import { ComponentsModule } from './../../components/components.module';
+import { TimeDisplayComponent } from './../../components/time-display/time-display';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TimerSettingsPage } from './timer-settings';
@@ -7,7 +9,7 @@ import { TimerSettingsPage } from './timer-settings';
     TimerSettingsPage,
   ],
   imports: [
-    IonicPageModule.forChild(TimerSettingsPage),
+    IonicPageModule.forChild(TimerSettingsPage)
   ],
 })
 export class TimerSettingsPageModule {}

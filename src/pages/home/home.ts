@@ -3,6 +3,7 @@ import { TimerStorageProvider } from './../../providers/timer-storage/timer-stor
 import { SingleTimer } from './../../classes/single-timer';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { mergeArraysGraceful } from '../../helper/array-helper';
 
 @Component({
   selector: 'page-home',
@@ -14,27 +15,13 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, private timerStorage: TimerStorageProvider) {
     this.timerStorage.timersChanged.subscribe(timersNew => {
-      this.timers.forEach((timerOld, index, arr) => {
-        const timerNew = timersNew.find(timer => timer.id = timerOld.id)
-        if (timerNew) {
-          Object.assign(timerOld, timerNew);
-          timersNew.splice(timersNew.findIndex(timer => timer.id = timerOld.id), 1);
-        } else {
-          arr.splice(index, 1);
-        }
-      });
-      this.timers = this.timers.concat(timersNew);
+      this.timers = mergeArraysGraceful(this.timers, timersNew, 
+        (timer1, timer2) => timer1.id === timer2.id) as SingleTimer[];
     });
     this.timerStorage.getAllTimers().then(timers => this.timers = timers);
   }
 
   ngOnInit() {
-  }
-
-  addExampleTimer(): void {
-    const timer = new SingleTimer();
-    timer.name = 'Test timer Example';
-    this.timerStorage.addTimer(timer);
   }
 
   addNewTimer(): void {

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Duration } from 'moment';
+import { Duration, Moment } from 'moment';
 
 /**
  * Generated class for the TimeDisplayComponent component.

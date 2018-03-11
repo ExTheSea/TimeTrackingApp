@@ -1,0 +1,18 @@
+expandable-container {
+
+    .baseContent {
+        transition: all 1s;
+    }
+
+    .expandedContent {
+        height: auto;
+    }
+
+    .shrunkContent {
+        height: 0;
+    }
+
+    .toolbar-title, ion-icon{
+        color: color($colors, primary);
+    }
+}

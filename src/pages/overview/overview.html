@@ -1,0 +1,57 @@
+<!--
+  Generated template for the OverviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ timer.name }}</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="primary" (click)="openEdit()">
+          <ion-icon name="settings"></ion-icon>
+        </button>
+        <button ion-button icon-only color="primary" (click)="openMoreActions($event)">
+          <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="overviewTop">
+      <div class="largeTimers">
+        <time-display [duration]="currentDuration"[showSeconds]=false></time-display>
+        <span class="timeSeparator">/</span>
+        <time-display [duration]="dailyDuration" [showSeconds]=false></time-display>
+      </div>
+      <button ion-button icon-only color="primary" (click)="playStop()" clear color="secondary">
+          <ion-icon [@iconSwitch]="runningIcon()" [name]="runningIcon()"></ion-icon>
+        </button>
+  </div>
+
+  <h1 class="subTitle">Daily</h1>
+  <basic-durations-display [actual]="dailyDuration" [target]="timerSettings.targetDayTime" *ngIf="timerSettings"></basic-durations-display>
+  <expandable-container title="Trackings" class="trackingContainer">
+    <div class="trackingList">
+      <div class="singleTracking trackingHeader">
+        <span>Start</span>
+        <span>Duration</span>
+        <span>End</span>
+      </div>
+        <div *ngFor="let tracking of dailyTrackings" [class]="getTrackingClass(tracking)">
+          <basic-time-display [date]="tracking.startTime"></basic-time-display>
+          -
+          <time-display [duration]="getDurationByTracking(tracking)" [showSeconds]=false></time-display>
+          -
+          <basic-time-display [date]="tracking.endTime"></basic-time-display>
+        </div>
+    </div>
+  </expandable-container>
+
+  <h1 class="subTitle">Weekly</h1>
+  <basic-durations-display [actual]="weeklyDuration" [target]="timerSettings.targetWeekTime" *ngIf="timerSettings"></basic-durations-display>
+
+</ion-content>
