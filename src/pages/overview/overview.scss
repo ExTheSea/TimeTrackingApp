@@ -61,19 +61,20 @@ page-overview {
     }
 
     .trackingList {
-        // padding: 1.5em;
+        padding: 1em;
     }
 
     .singleTracking {
         font-weight: normal;
         font-size: 2em;
+        line-height: 1.5em;
         display: flex;
         justify-content: space-between;
         color: tint(color($colors, primary), 60%);
     }
 
     .trackingHeader {
-        padding-bottom: .25em;
+        padding-bottom: .5em;
         font-weight: 100;
         font-size: 2.5;
         color: tint(color($colors, primary), 90%);
@@ -82,5 +83,14 @@ page-overview {
     .runningTracking {
         font-weight: bold;
         color: color($colors, secondary);
+    }
+
+    .donutChartWrapper {
+        height: 75vw;
+        width: 100%;
+    }
+
+    .donutText {
+        font-size: 10vw;
     }
 }

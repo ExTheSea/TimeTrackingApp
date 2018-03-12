@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { TimerSettingsPage } from './../timer-settings/timer-settings';
 import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { SingleTimer } from './../../classes/single-timer';

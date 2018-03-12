@@ -33,7 +33,18 @@
   </div>
 
   <h1 class="subTitle">Daily</h1>
-  <basic-durations-display [actual]="dailyDuration" [target]="timerSettings.targetDayTime" *ngIf="timerSettings"></basic-durations-display>
+
+  <div class="donutChartWrapper">
+      <duration-display-donut *ngIf="timerSettings" [radius]="70" [width]="20" [actual]="dailyDuration.asMilliseconds()" [target]="timerSettings.targetDayTime.asMilliseconds()">
+        <div class="donutText">
+            <time-display [duration]="dailyDuration"[showSeconds]=false label="logged"></time-display>
+            <span class="timeSeparator">/</span>
+            <time-display [duration]="timerSettings.targetDayTime" [showSeconds]=false label="target"></time-display>    
+        </div>
+      </duration-display-donut>
+    </div>
+
+  <!-- <basic-durations-display [actual]="dailyDuration" [target]="timerSettings.targetDayTime" *ngIf="timerSettings"></basic-durations-display> -->
   <expandable-container title="Trackings" class="trackingContainer">
     <div class="trackingList">
       <div class="singleTracking trackingHeader">

@@ -13,6 +13,12 @@ expandable-container {
     }
 
     .toolbar-title, ion-icon{
-        color: color($colors, primary);
+        color: tint(color($colors, primary), 75%);
     }
+
+    .item {
+        padding-left: 0px;
+    }    
 }
+
+

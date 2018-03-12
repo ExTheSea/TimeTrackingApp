@@ -15,6 +15,7 @@ export class TimeDisplayComponent {
 
   @Input() duration: Duration;
   @Input() showSeconds: boolean = true;
+  @Input() label: string;
 
   constructor() {
 
