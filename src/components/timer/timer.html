@@ -3,8 +3,11 @@
     <div class="timer-content">
         <ion-card-title>{{ singleTimer.name }}</ion-card-title>
     
-        <time-display [time]="time" [showSeconds]="false"></time-display>
-        <time-display [time]="time"></time-display>
+        <time-display *ngIf="runningDuration" [duration]="runningDuration"></time-display>
+        <span class="durationSeparator">/</span>
+        <time-display *ngIf="dayDuration" [duration]="dayDuration"></time-display>
+        <span class="durationSeparator">/</span>
+        <time-display *ngIf="weekDuration" [duration]="weekDuration"></time-display>
     </div>
     <div class="timer-button">
       <button ion-button icon-only color="primary" (click)="testClick()" clear color="secondary">
@@ -13,4 +16,5 @@
     </div>    
     <button (click)="editTimer()">Edit</button>
   </ion-card-content>
+  <daily-duration-indicator [timerId]="singleTimer.id"></daily-duration-indicator>
 </ion-card>

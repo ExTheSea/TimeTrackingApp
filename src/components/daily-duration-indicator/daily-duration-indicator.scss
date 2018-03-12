@@ -1,0 +1,24 @@
+daily-duration-indicator {
+
+    .indicatorParent {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .running {
+        background: color($colors, neutral);
+    }
+
+    .missing {
+        background: color($colors, danger)
+    }
+
+    .average {
+        background: color($colors, primary);
+    }
+
+    .more {
+        background: color($colors, secondary);
+    }
+}

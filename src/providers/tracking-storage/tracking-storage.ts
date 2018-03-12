@@ -32,8 +32,8 @@ export class TrackingStorageProvider {
     return this.getAllTrackingsByTimerId(timerId).then(trackings => {
       if (!trackings || !Array.isArray(trackings)) trackings = [];
       const runningTracking = trackings.find(tracking => tracking.endTime === undefined)
-      if (runningTracking) runningTracking.endTime = Time.createByDate(new Date());
-      const newTimerTracking = new TimerTracking(new Date(), Time.createByDate(new Date()), undefined);
+      if (runningTracking) runningTracking.endTime = new Date();
+      const newTimerTracking = new TimerTracking(new Date(), new Date(), undefined);
       trackings.push(newTimerTracking);
       return this.storeTrackingsByTimerId(timerId, trackings);
     })
@@ -43,13 +43,22 @@ export class TrackingStorageProvider {
     return this.getAllTrackingsByTimerId(timerId).then(trackings => {
       if (!trackings || !Array.isArray(trackings)) trackings = [];
       const runningTracking = trackings.find(tracking => tracking.endTime === undefined)
-      if (runningTracking) runningTracking.endTime = Time.createByDate(new Date());
+      if (runningTracking) runningTracking.endTime = new Date();
       return this.storeTrackingsByTimerId(timerId, trackings);
     })
+  }
+
+  public removeAllByTimer(timerId: number): Promise<boolean> {
+    return this.storage.set(TIMER_TRACKING_KEY + timerId, [])
+      .then(success => {
+        this.trackingChangedSubjects.delete(timerId);
+        return success;
+      })
   }
 
   private getTrackingChangedSubject(timerId: number) {
     if (!this.trackingChangedSubjects.has(timerId)) this.trackingChangedSubjects.set(timerId, new Subject<TimerTracking[]>())
     return this.trackingChangedSubjects.get(timerId)
-  }  
+  }
+  
 }

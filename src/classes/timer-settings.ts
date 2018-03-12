@@ -1,7 +1,8 @@
+import { Duration } from 'moment';
 import { Time } from './time';
 export class TimerSetting {
-    public targetDayTime: Time;
-    public targetWeekTime: Time;
+    public targetDayTime: Duration;
+    public targetWeekTime: Duration;
 
     constructor() {
         

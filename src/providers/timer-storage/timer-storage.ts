@@ -1,3 +1,5 @@
+import { TrackingStorageProvider } from './../tracking-storage/tracking-storage';
+import { TimerSettingStorageProvider } from './../timer-setting-storage/timer-setting-storage';
 import { SingleTimer } from './../../classes/single-timer';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -24,7 +26,11 @@ export class TimerStorageProvider {
     this.getAllTimers().then(timers => this.timersChangedSubject.next(timers));
   }
 
-  constructor(private storage: Storage) {}
+  constructor(
+    private storage: Storage,
+    private timerSettingStorage: TimerSettingStorageProvider,
+    private trackingStorage: TrackingStorageProvider
+  ) {}
 
   public getAllTimers(): Promise<SingleTimer[]> {
     return this.storage.get(TIMERS_KEY).then(timers => timers as SingleTimer[])
@@ -46,6 +52,8 @@ export class TimerStorageProvider {
     this.getAllTimers().then(timers => {
       timers.splice(timers.indexOf(singleTimer), 1);
       this.storage.set(TIMERS_KEY, timers).then(_ => this.triggerTimersChanged());
+      this.timerSettingStorage.setTimerSettingByTimerId(singleTimer.id, null);
+      this.trackingStorage.removeAllByTimer(singleTimer.id)
     });
   }
 

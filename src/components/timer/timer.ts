@@ -1,12 +1,16 @@
+import { TrackingCalculationProvider } from './../../providers/tracking-calculation/tracking-calculation';
+import { GeneralTimerTriggerProvider } from './../../providers/general-timer-trigger/general-timer-trigger';
+import { Subject } from 'rxjs/Subject';
 import { TimerSettingsPage } from './../../pages/timer-settings/timer-settings';
 import { NavController } from 'ionic-angular';
 import { TrackingStorageProvider } from './../../providers/tracking-storage/tracking-storage';
 import { TimerStorageProvider } from './../../providers/timer-storage/timer-storage';
 import { Time } from './../../classes/time';
 import { SingleTimer } from './../../classes/single-timer';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { trigger, transition, style, animate } from "@angular/animations"; 
+import * as moment from 'moment';
 
 /**
  * Generated class for the TimerComponent component.
@@ -28,25 +32,37 @@ import { trigger, transition, style, animate } from "@angular/animations";
     ])
   ]
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, OnDestroy {
 
   @Input() singleTimer: SingleTimer;
-  time: Time;
+  destroySubject = new Subject();
+
+  runningDuration: moment.Duration = moment.duration(0);
+  dayDuration: moment.Duration = moment.duration(0);
+  weekDuration: moment.Duration = moment.duration(0);
 
   constructor(
     private timerStorage: TimerStorageProvider,
     private trackingStorage: TrackingStorageProvider,
-    private navCtrl: NavController
-  ) {
-    this.time = new Time(1,20, null);
-  }
+    private navCtrl: NavController,
+    private generalTimerTrigger: GeneralTimerTriggerProvider,
+    private trackingCalc: TrackingCalculationProvider
+  ) {}
 
   ngOnInit() {
-    Observable.interval(1000).subscribe(timeInt => {
-      this.time.minutes = Math.floor(timeInt / 60);
-      this.time.hours = Math.floor(Math.floor(timeInt / 60) / 60);
-      this.time.seconds = timeInt % 60;
+    this.updateDurations();
+    this.generalTimerTrigger.subsribeToTrigger(this.destroySubject, timeInt => {
+      this.updateDurations()
     })
+  }
+
+  private updateDurations() {
+    this.trackingCalc.getRunningDuration(this.singleTimer.id)
+        .then(duration => this.runningDuration = duration);
+      this.trackingCalc.getDayDuration(this.singleTimer.id, moment())
+        .then(duration => this.dayDuration = duration);
+        this.trackingCalc.getWeekDuration(this.singleTimer.id, moment().weeks())
+          .then(duration => this.weekDuration = duration);
   }
 
   testClick(): void {
@@ -68,5 +84,9 @@ export class TimerComponent implements OnInit {
     this.navCtrl.push(TimerSettingsPage, {
       timer: this.singleTimer
     })
+  }
+
+  ngOnDestroy() {
+    this.destroySubject.next()
   }
 }

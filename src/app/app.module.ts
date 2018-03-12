@@ -13,6 +13,8 @@ import { TimerStorageProvider } from '../providers/timer-storage/timer-storage';
 import { TrackingStorageProvider } from '../providers/tracking-storage/tracking-storage';
 import { TimerSettingStorageProvider } from '../providers/timer-setting-storage/timer-setting-storage';
 import { TimerSettingsPageModule } from '../pages/timer-settings/timer-settings.module';
+import { GeneralTimerTriggerProvider } from '../providers/general-timer-trigger/general-timer-trigger';
+import { TrackingCalculationProvider } from '../providers/tracking-calculation/tracking-calculation';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { TimerSettingsPageModule } from '../pages/timer-settings/timer-settings.
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     TimerStorageProvider,
     TrackingStorageProvider,
-    TimerSettingStorageProvider
+    TimerSettingStorageProvider,
+    GeneralTimerTriggerProvider,
+    TrackingCalculationProvider
   ],
   schemas: []
 })
