@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 
 const SETTING_STORAGE_KEY = 'timerSetting';
 
+import * as moment from 'moment';
+
 /*
   Generated class for the TimerSettingStorageProvider provider.
 
@@ -19,10 +21,23 @@ export class TimerSettingStorageProvider {
     return this.storage.get(SETTING_STORAGE_KEY + timerId).then(setting => {
       if (!setting) throw Error('no Settings found')
       return setting;
-    }).then(setting => setting as TimerSetting);
+    }).then(settingsString => JSON.parse(settingsString))
+      .then(setting => setting as TimerSetting)
+      .then((setting: TimerSetting) => {
+        this.parseSettingDurationFields(setting);
+        return setting;
+      });
+  }
+
+  public parseSettingDurationFields(setting: TimerSetting) {
+    setting.targetDayTime = setting.targetDayTime ? 
+        moment.duration(setting.targetDayTime) : moment.duration(0);
+      setting.targetWeekTime = setting.targetWeekTime ? 
+        moment.duration(setting.targetWeekTime) : moment.duration(0);
+      return setting;
   }
 
   public setTimerSettingByTimerId(timerId: number, setting: TimerSetting): Promise<boolean> {
-    return this.storage.set(SETTING_STORAGE_KEY + timerId, setting);
+    return this.storage.set(SETTING_STORAGE_KEY + timerId, JSON.stringify(setting));
   }
 }
