@@ -11,4 +11,12 @@ page-home {
     .header::after {
         background: none;
     }
+
+    .test {
+        background: url('../assets/icon/ClockLogo.svg');
+        width: 1em;
+        height: 1em;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }

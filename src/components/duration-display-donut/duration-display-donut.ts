@@ -37,10 +37,10 @@ export class DurationDisplayDonutComponent implements OnChanges {
 
   ngOnChanges() {
     this.items[0].count = this.biggerThanTarget ? this.actual - this.target : this.target - this.actual;
-    this.items[0].color = this.biggerThanTarget ? '#f3ffbd' : '#b30f3b';
+    this.items[0].color = this.biggerThanTarget ? '#F3FFBD' : '#E8144D';
 
     this.items[1].count = this.biggerThanTarget ? this.target : this.actual,
-    this.items[1].color = this.biggerThanTarget ? '#70c1b3' : '#247ba0'
+    this.items[1].color = this.biggerThanTarget ? '#70C1B3' : '#247BA0'
   }
 
   get biggerThanTarget() {
