@@ -1,9 +1,0 @@
-<div>
-  <ion-item class="containerTitle" (click)="toggleExpanded()" no-lines>
-    <ion-title>{{ title }}</ion-title>
-    <ion-icon [@iconFlip]="expanded" name="ios-arrow-up" item-end></ion-icon>
-  </ion-item>
-  <div [@expand]="expanded">
-    <ng-content></ng-content>
-  </div>
-</div>

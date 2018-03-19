@@ -1,4 +1,0 @@
-<span class="displayContainer">
-    <span>{{duration.hours()}}<span class="minutes"><span class="timeIndicator">H</span> {{formatNumber(duration.minutes())}}<span class="timeIndicator">M</span></span><span class="seconds" *ngIf="duration.seconds() !== undefined && showSeconds"> {{ formatNumber(duration.seconds()) }}<span class="timeIndicator">S</span></span></span>
-    <span class="displayLabel" *ngIf="label">{{label}}</span>
-</span>

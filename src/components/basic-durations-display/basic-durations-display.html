@@ -1,8 +1,0 @@
-<div class="indicatorParent" *ngIf="actual && target">
-    <span [ngStyle]="firstStyle" [class]="firstClass">
-      <time-display [duration]="isLongerThanAvg ? target : actual"[showSeconds]=false *ngIf="showFirst"></time-display>
-    </span>
-    <span [ngStyle]="secondStyle"  [class]="secondClass">
-        <time-display [duration]="isLongerThanAvg ? diffToActual : diffToTarget"[showSeconds]=false *ngIf="showSecond"></time-display>
-    </span>
-  </div>
