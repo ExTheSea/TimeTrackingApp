@@ -1,0 +1,97 @@
+page-overview {
+    $darkbckgr: shade(color($colors, primary), 30%);
+    $bckgr: color($colors, primary);
+    $lightContrast: tint(color($colors, primary), 95%);
+    .content {
+        background: $darkbckgr;
+        color: $lightContrast;
+    }
+
+    .toolbar  .toolbar-background {
+        background-color: $darkbckgr;
+    }
+
+    .toolbar-content .toolbar-title, .toolbar .back-button {
+        color: $lightContrast;
+        font-weight: 100; 
+    }
+
+    .header::after {
+        background: none;
+    }
+
+    .item {
+        background: none;
+    }
+
+    .text-input {
+        color: $lightContrast;
+    }
+
+    .overviewTop {
+        display: flex;
+        flex-direction: row;
+
+        .largeTimers {
+            
+            flex-basis: 100%;
+
+            time-display {
+                font-size: 14vw;
+            }
+            .timeSeparator {
+                font-size: 18vw;
+                font-weight: 100;
+                margin: 1vw;
+                color: tint(color($colors, primary), 20%);
+            }
+        }
+
+        button {
+            font-size: 5vw;
+            margin: auto;
+            margin-right: 1vw;
+            min-height: 100%;
+        }
+    }
+
+    .subTitle {
+        font-weight: 100;
+        margin-top: 5vh;
+        font-size: 8vw;
+    }
+
+    .trackingList {
+        padding: 1em;
+    }
+
+    .singleTracking {
+        font-weight: normal;
+        font-size: 2em;
+        line-height: 1.5em;
+        display: flex;
+        justify-content: space-between;
+        color: tint(color($colors, primary), 60%);
+    }
+
+    .trackingHeader {
+        padding-bottom: .5em;
+        font-weight: 100;
+        font-size: 2.5;
+        color: tint(color($colors, primary), 90%);
+    }
+
+    .runningTracking {
+        font-weight: bold;
+        color: color($colors, secondary);
+    }
+
+    .donutChartWrapper {
+        height: 75vw;
+        width: 100%;
+    }
+
+    .donutText {
+        font-size: 10vw;
+    }
+}
