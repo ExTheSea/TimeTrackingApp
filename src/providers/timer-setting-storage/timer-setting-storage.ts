@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 import { TimerSetting } from './../../classes/timer-settings';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
@@ -5,6 +6,7 @@ import { Storage } from '@ionic/storage';
 const SETTING_STORAGE_KEY = 'timerSetting';
 
 import * as moment from 'moment';
+import { Subject } from 'rxjs';
 
 /*
   Generated class for the TimerSettingStorageProvider provider.
@@ -15,17 +17,18 @@ import * as moment from 'moment';
 @Injectable()
 export class TimerSettingStorageProvider {
 
+  private timerSettingChangedSubject = new Subject<number>();
+  public timerSettingChanged: Observable<number> = this.timerSettingChangedSubject.asObservable();
+
   constructor(public storage: Storage) {}
 
   public getTimerSettingByTimerId(timerId: number): Promise<TimerSetting> {
-    return this.storage.get(SETTING_STORAGE_KEY + timerId).then(setting => {
-      if (!setting) throw Error('no Settings found')
-      return setting;
-    }).then(settingsString => JSON.parse(settingsString))
-      .then(setting => setting as TimerSetting)
-      .then((setting: TimerSetting) => {
-        this.parseSettingDurationFields(setting);
-        return setting;
+    return this.storage.get(SETTING_STORAGE_KEY + timerId)
+      .then(settingsString => JSON.parse(settingsString) as TimerSetting)
+      .then((setting: TimerSetting) => setting ? this.parseSettingDurationFields(setting) : setting)
+      .catch(err => {
+        console.error(err);
+        return null;
       });
   }
 
@@ -38,6 +41,14 @@ export class TimerSettingStorageProvider {
   }
 
   public setTimerSettingByTimerId(timerId: number, setting: TimerSetting): Promise<boolean> {
-    return this.storage.set(SETTING_STORAGE_KEY + timerId, JSON.stringify(setting));
+    return this.storage.set(SETTING_STORAGE_KEY + timerId, JSON.stringify(setting))
+      .then(success => {
+        this.timerSettingChangedSubject.next(timerId);
+        return success;
+      });
+  }
+
+  public removeTimerSettingsByTimerId(timerId: number): Promise<boolean> {
+    return this.storage.remove(SETTING_STORAGE_KEY + timerId);
   }
 }

@@ -1,3 +1,5 @@
+import { iconSwitch } from './../../animations/iconSwitch';
+import { OverviewPage } from './../../pages/overview/overview';
 import { TrackingCalculationProvider } from './../../providers/tracking-calculation/tracking-calculation';
 import { GeneralTimerTriggerProvider } from './../../providers/general-timer-trigger/general-timer-trigger';
 import { Subject } from 'rxjs/Subject';
@@ -9,7 +11,6 @@ import { Time } from './../../classes/time';
 import { SingleTimer } from './../../classes/single-timer';
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
-import { trigger, transition, style, animate } from "@angular/animations"; 
 import * as moment from 'moment';
 
 /**
@@ -22,14 +23,7 @@ import * as moment from 'moment';
   selector: 'timer',
   templateUrl: 'timer.html',
   animations: [
-    trigger('iconSwitch', [
-      transition('* => *', [
-        style({ opacity: 0}),
-        animate('500ms ease-out', style({
-          opacity: 1
-        }))
-      ])
-    ])
+    iconSwitch
   ]
 })
 export class TimerComponent implements OnInit, OnDestroy {
@@ -65,7 +59,7 @@ export class TimerComponent implements OnInit, OnDestroy {
           .then(duration => this.weekDuration = duration);
   }
 
-  testClick(): void {
+  startStopTimer(): void {
     this.singleTimer.isRunning ? this.trackingStorage.stopTrackingTimer(this.singleTimer.id) : 
         this.trackingStorage.startTrackingTimer(this.singleTimer.id)
     this.singleTimer.isRunning = !this.singleTimer.isRunning;
@@ -80,10 +74,10 @@ export class TimerComponent implements OnInit, OnDestroy {
     this.timerStorage.removeTimer(this.singleTimer);
   }
 
-  editTimer() {
-    this.navCtrl.push(TimerSettingsPage, {
+  openOverview() {
+    this.navCtrl.push(OverviewPage, {
       timer: this.singleTimer
-    })
+    });
   }
 
   ngOnDestroy() {
