@@ -1,0 +1,98 @@
+page-weekly-overview {
+    $mainColor: color($colors, primary);
+    $secondary: color($colors, secondary);
+    $darkbckgr: shade($mainColor, 20%);
+    $bckgr: $mainColor;
+    $lightContrast: tint($mainColor, 95%);
+    .content {
+        background: $darkbckgr;
+        color: $lightContrast;
+    }
+
+    .toolbar  .toolbar-background {
+        background-color: $darkbckgr;
+    }
+
+    .pageHeader .toolbar-title, .toolbar .back-button {
+        color: $lightContrast;
+        font-weight: 100; 
+    }
+
+    .header::after {
+        background: none;
+    }
+
+    .item {
+        background: none;
+    }
+
+    .icon, .text-input {
+        color: $lightContrast;
+    }
+
+    .centerTitle .toolbar-title {
+        text-align: center;
+        font-weight: 500;
+        color: $lightContrast;
+    }
+
+
+    .dayIdentifier {
+        font-size: 2em;
+        line-height: 2em;
+        font-weight: 100;
+        color: $secondary;
+    }
+
+    .durationsRow {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .singleDuration {
+        margin: 2px;
+        height: 100%;
+        background-color: color($colors, neutral);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        time-display {
+            font-size: 2em;
+        }
+    }
+
+    .trackingList {
+        padding: 1em;
+    }
+
+    .singleTracking {
+        font-weight: normal;
+        font-size: 2em;
+        line-height: 1.5em;
+        display: flex;
+        justify-content: space-between;
+        color: tint(color($colors, primary), 60%);
+    }
+
+    .trackingHeader {
+        padding-bottom: .5em;
+        font-weight: 100;
+        font-size: 2.5;
+        color: tint(color($colors, primary), 90%);
+    }
+
+    .weekdayRow, .weekdayRow > ion-col {
+        transition: all .25s;
+        
+    }
+
+    .selectedRow {
+        background: $mainColor;
+        box-shadow: 0 3px 6px rgba(45, 77, 72, 0.1607843137254902), 0 3px 6px rgba(45, 77, 72, 0.23137254901960785);
+        ion-col {
+            color: $lightContrast;
+        }
+    }
+
+}

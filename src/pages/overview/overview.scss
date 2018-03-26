@@ -1,5 +1,5 @@
 page-overview {
-    $darkbckgr: shade(color($colors, primary), 30%);
+    $darkbckgr: shade(color($colors, primary), 20%);
     $bckgr: color($colors, primary);
     $lightContrast: tint(color($colors, primary), 95%);
     .content {

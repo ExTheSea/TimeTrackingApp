@@ -35,7 +35,7 @@
   <h1 class="subTitle">Daily</h1>
 
   <div class="donutChartWrapper">
-      <duration-display-donut *ngIf="timerSettings" [radius]="70" [width]="20" [actual]="dailyDuration.asMilliseconds()" [target]="timerSettings.targetDayTime.asMilliseconds()">
+      <duration-display-donut *ngIf="timerSettings" [radius]="70" [width]="10" [actual]="dailyDuration.asMilliseconds()" [target]="timerSettings.targetDayTime.asMilliseconds()">
         <div class="donutText">
             <time-display [duration]="dailyDuration"[showSeconds]=false label="logged"></time-display>
             <span class="timeSeparator">/</span>
@@ -64,5 +64,9 @@
 
   <h1 class="subTitle">Weekly</h1>
   <basic-durations-display [actual]="weeklyDuration" [target]="timerSettings.targetWeekTime" *ngIf="timerSettings"></basic-durations-display>
+  <button ion-button icon-right clear (click)="navigateToWeekly()" >
+    Weekly Overview
+    <ion-icon name="arrow-forward"></ion-icon>
+  </button>
 
 </ion-content>

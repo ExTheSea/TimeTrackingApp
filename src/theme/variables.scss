@@ -64,7 +64,7 @@ $colors: (
   dark:       shade($color1, 80%),
   lightSecondary: $color3,
   mainBckgr: (
-    base: shade($color1, 50%),
+    base: shade($color1, 20%),
     contrast: tint($color1, 90%)
   ),
   frontSecond: (
