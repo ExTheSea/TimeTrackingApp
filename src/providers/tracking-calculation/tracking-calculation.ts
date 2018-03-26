@@ -46,6 +46,18 @@ export class TrackingCalculationProvider {
       .catch(_ => moment.duration(0))
   }
 
+  public getRangeTrackings(timerId: number, startMoment: moment.Moment, endMoment: moment.Moment): Promise<TimerTracking[]> {
+    return this.trackingStorage.getAllTrackingsByTimerId(timerId)
+      .then(trackings => trackings
+        .filter(tracking => {
+          const startInRange = moment(tracking.startTime).isBetween(startMoment, endMoment);
+          const endInRange = moment(tracking.endTime).isBetween(startMoment, endMoment);
+          return startInRange || endInRange
+        })
+      )
+  }
+
+
   public getDayDuration(timerId: number, day: moment.Moment) {
     return this.getRangeDuration(
       timerId,

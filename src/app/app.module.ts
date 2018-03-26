@@ -1,3 +1,4 @@
+import { WeeklyOverviewPageModule } from './../pages/weekly-overview/weekly-overview.module';
 import { OverviewPageModule } from './../pages/overview/overview.module';
 import { OverviewPage } from './../pages/overview/overview';
 import { ComponentsModule } from './../components/components.module';
@@ -30,7 +31,8 @@ import { TrackingCalculationProvider } from '../providers/tracking-calculation/t
     IonicStorageModule.forRoot(),
     ComponentsModule,
     TimerSettingsPageModule,
-    OverviewPageModule
+    OverviewPageModule,
+    WeeklyOverviewPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

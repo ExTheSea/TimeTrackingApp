@@ -1,3 +1,4 @@
+import { WeeklyOverviewPage } from './../weekly-overview/weekly-overview';
 import { TimerSettingsPage } from './../timer-settings/timer-settings';
 import { OverviewMoreActionsPage } from './../overview-more-actions/overview-more-actions';
 import { TimerTracking } from './../../classes/timer-tracking';
@@ -134,5 +135,11 @@ export class OverviewPage implements OnInit, OnDestroy, OnChanges {
     const classes = ['singleTracking'];
     if (!tracking.endTime) classes.push('runningTracking');
     return classes.join(' ');
+  }
+
+  navigateToWeekly() {
+    this.navCtrl.push(WeeklyOverviewPage, {
+      timer: this.timer
+    });
   }
 }

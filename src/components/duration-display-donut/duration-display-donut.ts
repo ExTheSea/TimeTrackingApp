@@ -28,13 +28,6 @@ export class DurationDisplayDonutComponent implements OnChanges {
     }
   ];
 
-  text: string;
-
-  constructor() {
-    console.log('Hello DurationDisplayDonutComponent Component');
-    this.text = 'Hello World';
-  }
-
   ngOnChanges() {
     this.items[0].count = this.biggerThanTarget ? this.actual - this.target : this.target - this.actual;
     this.items[0].color = this.biggerThanTarget ? '#F3FFBD' : '#E8144D';
