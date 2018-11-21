@@ -8,6 +8,7 @@
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
+    "runAndroid": "ionic cordova run android -l --emulator",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve"
   },
@@ -37,7 +38,7 @@
     "cordova-plugin-ionic-keyboard": "^2.0.5"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.8",
+    "@ionic/app-scripts": "^3.2.0",
     "typescript": "2.4.2"
   },
   "description": "An Ionic project",
