@@ -7,10 +7,19 @@
 </ion-header>
 
 <ion-content padding class="homeBckgr">
-  <timer *ngFor="let aTimer of timers" [singleTimer]="aTimer" ></timer>
+  <timer *ngFor="let aTimer of timers" [singleTimer]="aTimer"></timer>
   <ion-fab right bottom>
     <button ion-fab color="secondary" outline (click)="addNewTimer()">
-        <ion-icon name="md-add"></ion-icon>
+      <ion-icon name="md-add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-item>
+    <ion-label floating>Phone Number</ion-label>
+    <ion-input type="tel" [(ngModel)]="phoneNumber"></ion-input>
+  </ion-item>
+  <ion-fab bottom left>
+    <button ion-button (click)="callNumber()">
+      <ion-icon name="call"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>
